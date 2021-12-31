@@ -85,7 +85,7 @@ function Login() {
                         </div>
                             <div className='col-lg-7 px-5 pt-5'>
                                 <h2 className='font-weight-bold py-3'>Login</h2>
-                                <h4>Create an account to enjoy our services</h4>
+                                <h4>Login in to enjoy our services</h4>
                                 <form className='' onSubmit={handelSubmit}>
                                     <div className='form-row'>
                                         <div className='col-lg-7'>
