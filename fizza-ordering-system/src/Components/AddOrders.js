@@ -46,10 +46,9 @@ function AddOrders() {
 
     useEffect(() => {
         if(Object.keys(formErrors).length === 0 && isSubmit) {
-            console.log(formvalues)
-            navigate('/orderlist')
+            //console.log(formvalues)
         }
-    },[formErrors, {...formvalues}, navigate])
+    },[formErrors, isSubmit, navigate])
 
     const validate = (values) => {
         const errors = {}
@@ -66,6 +65,10 @@ function AddOrders() {
             errors.Table_No = "Required Field!... ";
         }
         return errors;
+    }
+
+    const handelGOTO = () => {
+        navigate('/orderlist')
     }
 
     return (
@@ -85,9 +88,10 @@ function AddOrders() {
                                 <form className='' onSubmit={handelSubmit}>
                                     <div className='form-row'>
                                         <div className='col-lg-7'>
-                                            <select placeholder='Crust' className='form-control mt-4' ref={crustRef} value={formvalues.Crust} onChange={handelChange} name='Crust'>
-                                                <option >Classic</option>
-                                                <option >Cheese</option>
+                                            <select className='form-control mt-4' ref={crustRef} value={formvalues.Crust} onChange={handelChange} name='Crust'>
+                                                <option value='' disabled selected>CRUST</option>
+                                                <option value='Classic'>Classic</option>
+                                                <option value='Cheese'>Cheese</option>
                                             </select>
                                         </div>
                                         <p>{formErrors.Crust}</p>
@@ -96,11 +100,12 @@ function AddOrders() {
                                     <div className='form-row'>
                                         <div className='col-lg-7'>
                                         <select placeholder='Flavor' className='form-control mt-4' ref={flavorRef} value={formvalues.Flavor} onChange={handelChange} name='Flavor'>
-                                                <option>Cheese</option>
-                                                <option>Veggie</option>
-                                                <option>Pepperoni</option>
-                                                <option>Meat</option>
-                                                <option>Margherita</option>
+                                                <option value='' disabled selected>Flavor</option>
+                                                <option value='Cheese'>Cheese</option>
+                                                <option value='Veggie'>Veggie</option>
+                                                <option value='Pepperoni'>Pepperoni</option>
+                                                <option value='Meat'>Meat</option>
+                                                <option value='Margherita'>Margherita</option>
                                             </select>
                                         </div>
                                         <p>{formErrors.Flavor}</p>
@@ -110,10 +115,11 @@ function AddOrders() {
                                         <div className='col-lg-7'>
 
                                         <select placeholder='Size' className='form-control mt-4' ref={sizeRef} value={formvalues.Size} onChange={handelChange} name='Size'>
-                                                <option>Small</option>
-                                                <option>Medium</option>
-                                                <option>Large</option>
-                                                <option>Fiesta</option>
+                                                <option disabled selected value=''>Size</option>
+                                                <option value='Small'>Small</option>
+                                                <option value='Medium'>Medium</option>
+                                                <option value='Large'>Large</option>
+                                                <option value='Fiesta'>Fiesta</option>
                                             </select>
                                             
                                         </div>
@@ -139,6 +145,12 @@ function AddOrders() {
                                     <div className='form-row'>
                                         <div className='col-lg-7'>
                                             <button type='submit' className='btn1 mt-3 mb-5 '> Add Item</button>
+                                            {isSubmit &&
+                                                <div>
+                                                    <p className='successTXT'>ITEM Added Successfully</p>
+                                                    <button className='successbtn' onClick={handelGOTO}>GO TO MAIN PAGE</button>
+                                                </div>
+                                            }
                                         </div>
                                     </div>
                                 </form>

@@ -2,9 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require('cors')
 const route = require('./Route/index')
-//const dotenv = require("dotenv")
+const dotenv = require('dotenv')
 
-//dotenv.config();
+dotenv.config();
+
 
 const app = express();
 
@@ -14,11 +15,11 @@ app.use(express.json());
 
 app.use('/api', route)
 
-const port =  8000;
+const port =  process.env.PORT || 8000;
 
-mongoose.connect('mongodb+srv://Madhusudan:15717@cluster0.ssc3h.mongodb.net/Pizza-Orders?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URL,{
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    
 }).then(() => {
     console.log('Connected to DataBase');
 }).catch(err => {
