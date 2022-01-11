@@ -8,6 +8,7 @@ function Login() {
     const myStorage = window.localStorage;
     const initialvalues = { username: "", email: "", password: ""};
     const [formvalues, setFormValues] = useState(initialvalues);
+    const [users, setUsers] = useState(false)
     const [formErrors, setFormErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
     
@@ -37,7 +38,7 @@ function Login() {
             myStorage.setItem("user", result.data.userName)
             setIsSubmit(true);
         }catch(err){
-           console.log(err)
+           setUsers(true)
         }
         setFormErrors(validate(formvalues));
     }
@@ -114,6 +115,9 @@ function Login() {
                                     <div className='form-row'>
                                         <div className='col-lg-7'>
                                             <button type='submit' className='btn1 mt-3 mb-5 '>Login</button>
+                                            {users && 
+                                                <p className='text'>Invalid username and password!...</p>
+                                            }
                                         </div>
                                     </div>
                                     <p>Don't have an account <a href='#' onClick={handelNavigate}>Register here</a></p>
